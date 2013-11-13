@@ -1,12 +1,10 @@
-/* global test */
 
-(function(){
-    'use strict';
+'use strict';
 
-    exports.testSomething = function(test){
-        test.ok(true, 'this should be true');
+var server = require("./server.js");
 
-        test.done();
-    };
+exports.testSomething = function(test){
+    test.ok(server.doIWork(), 'this should be true');
 
-}());
+    test.done();
+};

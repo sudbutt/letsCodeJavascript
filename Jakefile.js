@@ -19,6 +19,7 @@ task("lint", function(){
 desc("run unit tests");
 task("test", function() {
     var reporter = require('nodeunit').reporters.default;
+    
     reporter.run(["./server/src/_server_test.js"]);
 });
 
