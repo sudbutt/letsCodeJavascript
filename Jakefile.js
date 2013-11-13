@@ -1,8 +1,9 @@
-desc("Example");
-task("example", ["runBeforeExample"], function(){
-	console.log("jake fukin task");
+desc("Default");
+task("default", ["lint"], function(){
 });
 
-task("runBeforeExample", function(){
-	console.log("i should be output before example");
+desc("Lint everything");
+task("lint", function(){
+	var lint = require("./build/lint/lint_runner.js");
+	lint.validateFile("Jakefile.js", {}, {});
 });
