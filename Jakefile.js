@@ -1,5 +1,5 @@
 "use strict";
-
+// jshint ignores these jake functions not being defined for this file
 /* global desc, task, jake */
 
 desc("Default");
@@ -9,8 +9,8 @@ task("default", ["lint"], function(){
 
 desc("Lint everything");
 task("lint", function(){
-    var lint = require("./build/lint/lint_runner.js");
-    var files = new jake.FileList();
+    var lint = require("./build/lint/lint_runner.js"),
+        files = new jake.FileList();
     
     files.include("**/*.js");
     files.exclude("node_modules");
