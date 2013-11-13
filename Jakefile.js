@@ -1,5 +1,4 @@
 "use strict";
-// jshint ignores these jake functions not being defined for this file
 /* global desc, task, jake */
 
 desc("Default");
