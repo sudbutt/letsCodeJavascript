@@ -2,11 +2,11 @@
 /* global desc, task, jake */
 
 desc("Default");
-task("default", ["lint"], function(){
+task("default", ["lint", "test"], function(){
 });
 
 
-desc("Lint everything");
+desc("Lint my code");
 task("lint", function(){
     var lint = require("./build/lint/lint_runner.js"),
         files = new jake.FileList();
@@ -14,6 +14,12 @@ task("lint", function(){
     files.include("**/*.js");
     files.exclude("node_modules");
     lint.validateFileList(files, lintOptions(), {});
+});
+
+desc("run unit tests");
+task("test", function() {
+    var reporter = require('nodeunit').reporters.default;
+    reporter.run(["./server/src/_server_test.js"]);
 });
 
 function lintOptions(){
