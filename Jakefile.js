@@ -1,5 +1,12 @@
 "use strict";
 /* global desc, task, jake, fail, complete */
+var logBefore = function(text){
+    return console.log('\n' + text + '******************************************');
+};
+
+var logAfter = function(text){
+    return console.log(text + '******************************************' + '\n');
+};
 
 desc("Default");
 task("default", ["lint", "test"], function(){
@@ -14,11 +21,17 @@ task("lint", function(){
     
     files.include("**/*.js");
     files.exclude("node_modules");
+
+    logBefore('Linting Gooo!');
+
     passed = lint.validateFileList(files, lintOptions(), {});
 
     if(!passed){
         fail("Lint Failed Build Halted");
     }
+
+    logAfter('Linting Fin.');
+
 });
 
 desc("Integration checklist");
@@ -38,14 +51,20 @@ task("integrate", ["default"], function() {
 
 desc("run unit tests");
 task("test", {async : true}, function() {
+    
+    logBefore('Tests Gooo!');
+
     var reporter = require('nodeunit').reporters.default;
     
     reporter.run(["./server/src/_server_test.js"], null, function(failures) {
         if(failures) {
             fail("Unit Test Failed Build Halted");
         }
-        complete();
+
+        complete(logAfter('Tests Fin.'));
+
     });
+
 });
 
 function lintOptions(){
