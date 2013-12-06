@@ -37,7 +37,7 @@ task("integrate", ["default"], function() {
 });
 
 desc("run unit tests");
-task("test", function() {
+task("test", {async : true}, function() {
     var reporter = require('nodeunit').reporters.default;
     
     reporter.run(["./server/src/_server_test.js"], null, function(failures) {
@@ -46,7 +46,7 @@ task("test", function() {
         }
         complete();
     });
-}, {async : true});
+});
 
 function lintOptions(){
     var options = {
